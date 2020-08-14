@@ -18,7 +18,9 @@ public class BeanTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("app.xml");
 
         TestBean testBean = context.getBean("testBean", TestBean.class);
+        BeanConfig beanConfig = context.getBean("beanConfig", BeanConfig.class);
 
+        System.out.println("ClassPathXmlApplicationContext: " +  beanConfig);
         System.out.println("ClassPathXmlApplicationContext: " +  testBean);
         System.out.println("ClassPathXmlApplicationContext: " +  testBean.getName());
         System.out.println("ClassPathXmlApplicationContext: " + testBean.getTestDao());
@@ -49,6 +51,8 @@ public class BeanTest {
         annotationConfigApplicationContext.register(BeanConfig.class);
 
         annotationConfigApplicationContext.refresh();
+
+        System.out.println("annotationConfigApplicationContext: " + annotationConfigApplicationContext.getBean("beanConfig"));
 
 //        Object userService = annotationConfigApplicationContext.getBean("userService");
         UserService userService = annotationConfigApplicationContext.getBean("userServiceImpl", UserServiceImpl.class);
