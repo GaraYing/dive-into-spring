@@ -14,4 +14,5 @@
         <property name="testDao" ref="testDao"/>
     </bean>
     <!--<bean id="testDao" class="com.gara.bean.TestDao"/>-->
+    <bean id = "test" class="com.gara.bean.TestBean$Test"/>
 </beans>

@@ -1,5 +1,6 @@
 package com.gara.config;
 
+import com.gara.bean.TestBean;
 import com.gara.bean.TestDao;
 import com.gara.service.UserService;
 import com.gara.service.impl.UserAccountServiceImpl;
@@ -35,5 +36,10 @@ public class BeanConfig {
     @Bean
     public UserAccountServiceImpl userService(){
         return new UserAccountServiceImpl();
+    }
+
+    @Bean
+    public TestBean.Test testBeanTest(){
+        return new TestBean.Test();
     }
 }
