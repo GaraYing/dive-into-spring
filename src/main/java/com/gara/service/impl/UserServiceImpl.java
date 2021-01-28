@@ -26,7 +26,7 @@ public class UserServiceImpl extends AbstractUserService implements Initializing
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("method afterPropertiesSet()");
+        System.out.println("UserServiceImpl.afterPropertiesSet() method afterPropertiesSet()");
     }
 
     @Override

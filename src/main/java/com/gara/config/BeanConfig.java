@@ -4,15 +4,13 @@ import com.gara.bean.TestBean;
 import com.gara.bean.TestDao;
 import com.gara.service.UserService;
 import com.gara.service.impl.UserAccountServiceImpl;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 import javax.annotation.PostConstruct;
 
 @Configuration
 @ImportResource("classpath:properties-config.xml")
+@Import(AnotherBeanConfig.class)
 public class BeanConfig {
 
     private final UserService userService;
