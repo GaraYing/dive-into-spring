@@ -3,11 +3,13 @@ package com.gara;
 import com.gara.bean.TestBean;
 import com.gara.bean.TestDao;
 import com.gara.config.BeanConfig;
+import com.gara.config.DataSourceConfig;
 import com.gara.service.UserService;
 import com.gara.service.impl.UserAccountServiceImpl;
 import com.gara.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
@@ -48,10 +50,14 @@ public class BeanTest {
         System.out.println("testBean.getTestDao() == testDao2: " + (testBean.getTestDao() == testDao2));
 
 //        BeanConfig beanConfig = genericApplicationContext.getBeanFactory().createBean(BeanConfig.class);
-//         基于注解实现的
         AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext();
         annotationConfigApplicationContext.scan("com.gara");
         annotationConfigApplicationContext.register(BeanConfig.class);
+
+
+        AnnotatedBeanDefinitionReader annotatedBeanDefinitionReader = new AnnotatedBeanDefinitionReader(annotationConfigApplicationContext);
+        annotatedBeanDefinitionReader.register(DataSourceConfig.class);
+        System.out.println("annotationConfigApplicationContext.getBean(DataSourceConfig.class) = " + annotationConfigApplicationContext.getBean(DataSourceConfig.class));
 
         annotationConfigApplicationContext.refresh();
 
