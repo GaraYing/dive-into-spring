@@ -15,6 +15,8 @@ import org.springframework.context.support.GenericApplicationContext;
 public class BeanTest {
 
     public static void main(String[] args) {
+
+        // 基于xml文件实现
         ApplicationContext context = new ClassPathXmlApplicationContext("app.xml");
 
         TestBean testBean = context.getBean("testBean", TestBean.class);
@@ -36,7 +38,7 @@ public class BeanTest {
 
         System.out.println("GenericApplicationContext: " + testBean);
         System.out.println("GenericApplicationContext: " + testBean.getName());
-        System.out.println("GenericApplicationContext: " + testBean.getTestDao());
+        // System.out.println("GenericApplicationContext: " + testBean.getTestDao());
 
         TestDao testDao2 = genericApplicationContext.getBean("testDao2", TestDao.class);
 
@@ -46,6 +48,7 @@ public class BeanTest {
         System.out.println("testBean.getTestDao() == testDao2: " + (testBean.getTestDao() == testDao2));
 
 //        BeanConfig beanConfig = genericApplicationContext.getBeanFactory().createBean(BeanConfig.class);
+//         基于注解实现的
         AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext();
         annotationConfigApplicationContext.scan("com.gara");
         annotationConfigApplicationContext.register(BeanConfig.class);
