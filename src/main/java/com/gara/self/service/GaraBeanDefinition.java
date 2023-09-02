@@ -14,7 +14,7 @@ public class GaraBeanDefinition {
      */
     private String scope;
     /**
-     * 是否懒加载
+     * 是否为懒加载
      */
     private Boolean isLazy;
 

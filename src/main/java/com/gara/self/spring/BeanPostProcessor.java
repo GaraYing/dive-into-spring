@@ -1,6 +1,7 @@
 package com.gara.self.spring;
 
-import com.sun.istack.internal.Nullable;
+
+import javax.annotation.Nullable;
 
 /**
  * @author GARA

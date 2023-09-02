@@ -5,7 +5,6 @@ import com.gara.bean.TestDao;
 import com.gara.service.UserService;
 import com.gara.service.impl.UserAccountServiceImpl;
 import org.springframework.context.annotation.*;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -28,10 +27,15 @@ public class BeanConfig {
         System.out.println("postConstruct");
     }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate(){
-        return new JdbcTemplate();
-    }
+    // @Bean
+    // public JdbcTemplate jdbcTemplate(){
+    //     return new JdbcTemplate();
+    // }
+
+    // @Bean
+    // public InfoBeanInfact infoBeanInfact(){
+    //     return new InfoBeanInfact();
+    // }
 
     @Bean({"test","test2"})
     @Scope("prototype")

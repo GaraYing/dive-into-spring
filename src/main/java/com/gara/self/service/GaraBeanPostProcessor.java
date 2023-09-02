@@ -25,7 +25,7 @@ public class GaraBeanPostProcessor implements BeanPostProcessor {
                 public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                     // 切面逻辑
                     System.out.println("切面逻辑");
-                    // 最终执行的普通的Bean对象方法
+                    // 执行普通的对象方法
                     method.invoke(bean, args);
                     return proxy;
                 }

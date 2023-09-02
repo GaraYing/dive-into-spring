@@ -13,6 +13,9 @@ import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.env.MutablePropertySources;
+
+import java.util.Map;
 
 public class BeanTest {
 
@@ -57,9 +60,9 @@ public class BeanTest {
 
         AnnotatedBeanDefinitionReader annotatedBeanDefinitionReader = new AnnotatedBeanDefinitionReader(annotationConfigApplicationContext);
         annotatedBeanDefinitionReader.register(DataSourceConfig.class);
-        System.out.println("annotationConfigApplicationContext.getBean(DataSourceConfig.class) = " + annotationConfigApplicationContext.getBean(DataSourceConfig.class));
 
         annotationConfigApplicationContext.refresh();
+        System.out.println("annotationConfigApplicationContext.getBean(DataSourceConfig.class) = " + annotationConfigApplicationContext.getBean(DataSourceConfig.class));
 
         System.out.println("annotationConfigApplicationContext: " + annotationConfigApplicationContext.getBean("beanConfig"));
 
@@ -72,6 +75,16 @@ public class BeanTest {
         userService.queryUser(1L);
         userAccountService.queryAccount(2L);
 
+        Map<String, Object> systemProperties = annotationConfigApplicationContext.getEnvironment().getSystemProperties();
+        System.out.println("systemProperties = " + systemProperties);
+        System.out.println("----------");
+        MutablePropertySources propertySources = annotationConfigApplicationContext.getEnvironment().getPropertySources();
+        System.out.println("propertySources = " + propertySources);
+        System.out.println("----------");
+        System.out.println("annotationConfigApplicationContext.getEnvironment().getProperty(\"file.encoding\") = " + annotationConfigApplicationContext.getEnvironment().getProperty("file.encoding"));
+
+        System.out.println("annotationConfigApplicationContext.getBean(\"infoBeanInfact\") = " + annotationConfigApplicationContext.getBean("infoBeanInfact"));
+        System.out.println("annotationConfigApplicationContext.getBean(\"&infoBeanInfact\") = " + annotationConfigApplicationContext.getBean("&infoBeanInfact"));
         genericApplicationContext.close();
         annotationConfigApplicationContext.close();
     }
