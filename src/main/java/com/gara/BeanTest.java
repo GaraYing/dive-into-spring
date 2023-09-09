@@ -3,7 +3,7 @@ package com.gara;
 import com.gara.bean.TestBean;
 import com.gara.bean.TestDao;
 import com.gara.config.BeanConfig;
-import com.gara.config.DataSourceConfig;
+import com.gara.datasource.DataSourceConfig;
 import com.gara.service.UserService;
 import com.gara.service.impl.UserAccountServiceImpl;
 import com.gara.service.impl.UserServiceImpl;

@@ -19,6 +19,6 @@ public class DbApplication {
     @EventListener(classes = ApplicationContextEvent.class)
     public void datasource() {
 
-        log.info("springApplication context started");
+//        log.info("springApplication context started");
     }
 }
