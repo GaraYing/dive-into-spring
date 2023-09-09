@@ -3,18 +3,25 @@ package com.gara;
 import com.gara.bean.TestBean;
 import com.gara.bean.TestDao;
 import com.gara.config.BeanConfig;
+import com.gara.config.DataSourceConfig;
 import com.gara.service.UserService;
 import com.gara.service.impl.UserAccountServiceImpl;
 import com.gara.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.env.MutablePropertySources;
+
+import java.util.Map;
 
 public class BeanTest {
 
     public static void main(String[] args) {
+
+        // 基于xml文件实现
         ApplicationContext context = new ClassPathXmlApplicationContext("app.xml");
 
         TestBean testBean = context.getBean("testBean", TestBean.class);
@@ -36,7 +43,7 @@ public class BeanTest {
 
         System.out.println("GenericApplicationContext: " + testBean);
         System.out.println("GenericApplicationContext: " + testBean.getName());
-        System.out.println("GenericApplicationContext: " + testBean.getTestDao());
+        // System.out.println("GenericApplicationContext: " + testBean.getTestDao());
 
         TestDao testDao2 = genericApplicationContext.getBean("testDao2", TestDao.class);
 
@@ -50,7 +57,12 @@ public class BeanTest {
         annotationConfigApplicationContext.scan("com.gara");
         annotationConfigApplicationContext.register(BeanConfig.class);
 
+
+        AnnotatedBeanDefinitionReader annotatedBeanDefinitionReader = new AnnotatedBeanDefinitionReader(annotationConfigApplicationContext);
+        annotatedBeanDefinitionReader.register(DataSourceConfig.class);
+
         annotationConfigApplicationContext.refresh();
+        System.out.println("annotationConfigApplicationContext.getBean(DataSourceConfig.class) = " + annotationConfigApplicationContext.getBean(DataSourceConfig.class));
 
         System.out.println("annotationConfigApplicationContext: " + annotationConfigApplicationContext.getBean("beanConfig"));
 
@@ -63,6 +75,16 @@ public class BeanTest {
         userService.queryUser(1L);
         userAccountService.queryAccount(2L);
 
+        Map<String, Object> systemProperties = annotationConfigApplicationContext.getEnvironment().getSystemProperties();
+        System.out.println("systemProperties = " + systemProperties);
+        System.out.println("----------");
+        MutablePropertySources propertySources = annotationConfigApplicationContext.getEnvironment().getPropertySources();
+        System.out.println("propertySources = " + propertySources);
+        System.out.println("----------");
+        System.out.println("annotationConfigApplicationContext.getEnvironment().getProperty(\"file.encoding\") = " + annotationConfigApplicationContext.getEnvironment().getProperty("file.encoding"));
+
+        System.out.println("annotationConfigApplicationContext.getBean(\"infoBeanInfact\") = " + annotationConfigApplicationContext.getBean("infoBeanInfact"));
+        System.out.println("annotationConfigApplicationContext.getBean(\"&infoBeanInfact\") = " + annotationConfigApplicationContext.getBean("&infoBeanInfact"));
         genericApplicationContext.close();
         annotationConfigApplicationContext.close();
     }

@@ -20,10 +20,22 @@ public class BeanConfig {
         System.out.println("beanConfig");
     }
 
+
+
     @PostConstruct
     private void postConstruct(){
         System.out.println("postConstruct");
     }
+
+    // @Bean
+    // public JdbcTemplate jdbcTemplate(){
+    //     return new JdbcTemplate();
+    // }
+
+    // @Bean
+    // public InfoBeanInfact infoBeanInfact(){
+    //     return new InfoBeanInfact();
+    // }
 
     @Bean({"test","test2"})
     @Scope("prototype")

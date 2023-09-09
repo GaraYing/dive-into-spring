@@ -6,7 +6,10 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
-
+//编译JAVA文件时采用UTF-8
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 repositories {
     maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     mavenCentral()
@@ -15,7 +18,9 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.springframework', name: 'spring-context', version: '5.2.6.RELEASE'
-    compile group: 'org.springframework', name: 'spring-aop', version: '5.2.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.2.6.RELEASE'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-
+    compile group: 'com.alibaba.nacos', name: 'nacos-spring-context', version: '1.1.0'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.2.6.RELEASE'
+    implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
 }
